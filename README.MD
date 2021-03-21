@@ -37,7 +37,7 @@ Assemblies were processed in AnVIL using publicly available workflows in the Hum
 * [QUAST](https://sourceforge.net/projects/quast/files/)
 * [YAK](https://github.com/lh3/yak)
 
-Results from automated QC are included next to the assemblies in both the AWS and GCP HPRC buckets.
+Select metrics were extracted and placed into the `automated_qc_results/` directory of this repo: raw values are in a CSV alongside charts for N50, hamming/switch error rates, QV values, and contig counts. Full results from automated QC are included next to the assemblies in both the AWS and GCP HPRC buckets.
 
 **For more information about the automated QC, please see the QC workflows in the [HPP GitHub Repo](https://github.com/human-pangenomics/hpp_production_workflows).**
 * [standard_qc](https://github.com/human-pangenomics/hpp_production_workflows/blob/master/QC/wdl/workflows/standard_qc.wdl)
@@ -68,6 +68,8 @@ Assemblies are available in the working directory of the HPRC [S3](https://s3-us
 ```
 
 Raw hifiasm output (including GFAs) are included for the currently assembly release in each sample's working area under `assemblies/hifiasm_v0.14_raw/`.
+
+A complete list of the paths to the assembly fastas in S3/GCP can be found in the `assembly_index/` directory of this repo.
 
 AnVIL users can access the data stored in GCP through the public [AnVIL_HPRC workspace](https://app.terra.bio/#workspaces/anvil-datastorage/AnVIL_HPRC). Alternatively, data can be accessed directly from AWS or GCP, and data stored in the HPRC S3 Bucket can be accessed without egress fees.
 
