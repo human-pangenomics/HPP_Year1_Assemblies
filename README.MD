@@ -77,13 +77,14 @@ AnVIL users can access the data stored in GCP through the public [AnVIL_HPRC wor
 
 ### Known Issues
 
-* **outstanding:** HG002 maternal contig h2tg000045l has a misjoin of chr1 and chr2 along with a large false duplication. HG002 is currently being reassembled with all PacBio HiFi v2 data and a newer version of hifiasm to fix these issues. 
-* **outstanding** HG01071 does not produce a MT contig
-* **manually fixed:** HG02080 had a misjoin in h2tg000053l
+* **fixed:** HG002 maternal contig h2tg000045l had a misjoin of chr1 and chr2 along with a large false duplication. Sample was reassembled using a new (v0.14.1) version of hifisasm to fix the misjoin issue. New assemblies released under v2.1.
+* **outstanding:** HG01071 does not produce a MT contig
+* **manually fixed:** HG02080 (maternal) had a misjoin in h2tg000053l
   * h2tg000053l_1 : h2tg000053l [0, 41506502]
   * h2tg000053l_2 : h2tg000053l [63683095, 92488067]
+* **outstanding**: HG02080 (paternal) has a contig (h1tg000073l) where 4mb aligns to chr17 and 7mb aligns to chr19. It is unclear if this is a misjoin so it was not manually broken.
 * **manually fixed:** The original paternal v2 assemblies for HG01123 & HG01358 each had a misjoin and a false duplication. This was fixed manually and released under v2.1
-  * Only these two samples have v2.1 
+  * Only these two samples (and HG002) have v2.1 
   * Note that the QC was run w/ the name v2 but v2.1 data was used for these two samples 
   * Below are the break points:
     * HG01123: remove [94439457, contig end) of h1tg000013l 
@@ -99,5 +100,6 @@ AnVIL users can access the data stored in GCP through the public [AnVIL_HPRC wor
   * Added HiFiAdapterFilt preprocessing of HiFi data
   * Switched to Hifiasm v0.14
   * Added masking based on minimap2 alignments of SMRTBell adapter dimer
-* Mar 18, 2021: fixed misjoin and false duplications in paternal assemblies for HG01123 & HG01358 
+* Mar 18, 2021: fixed misjoin and false duplications in paternal assemblies for HG01123 & HG01358
+* Apr 06, 2021: fixed misjoin and false duplication in HG002 maternal contig. 
 ```
