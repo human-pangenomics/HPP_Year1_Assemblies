@@ -8,6 +8,20 @@
 
 ------------------
 
+### Genbank Version Of Assemblies
+
+Freeze 1 (v2) assemblies were uploaded to Genbank/NCBI and are now available. These assemblies are expected to be the final release of the year 1 assemblies and should be used for all analysis and pangenome work. A list of the current assemblies can be found in the index file (assembly_index/Year1_assemblies_v2_genbank.index).
+
+As part of the upload to Genbank, contaminated contigs are identified and dropped. Some contigs which are almost certainly contamination were not identified, however. In addition, leading/trailing hard-masked nucleotides were trimmed from the contigs -- resulting in a co-ordinate change for those contigs. Lastly, contigs were renamed by Genbank with their accession IDs. Files have been provided in the genbank_changes folder to document these changes.
+
+**Files in the genbank_changes folder:**
+* y1_genbank_contig_translation_table.txt: Translation table for contig names
+* y1_genbank_dropped_contigs.txt: Contigs dropped by Genbank 
+* y1_genbank_remaining_potential_contamination.txt: Contigs that may be contamination
+* y1_genbank_trimmed_sequence.txt: Sequence trimmed by Genbank
+
+------------------
+
 ### Assembly Process
 
 Assemblies were processed in AnVIL using publicly available workflows in the Human Pangenomics [hpp_production_workflows repo](https://github.com/human-pangenomics/hpp_production_workflows)
@@ -54,6 +68,9 @@ Assemblies are available in the working directory of the HPRC [S3](https://s3-us
         └── HG00438/
             └── raw_data/ 
             └── assemblies/
+                └── year1_f1_assembly_v2_genbank/
+                    └── HG00438.maternal.f1_assembly_v2_genbank.fa.gz
+                    └── HG00438.paternal.f1_assembly_v2_genbank.fa.gz              
                 └── year1_freeze_assembly_v2/
                     └── HG00438.maternal.f1_assembly_v2.fa.gz
                     └── HG00438.paternal.f1_assembly_v2.fa.gz
@@ -67,6 +84,8 @@ Assemblies are available in the working directory of the HPRC [S3](https://s3-us
 
 ```
 
+Note that the current version of the assemblies is under 'year1_f1_assembly_v2_genbank/', but prior versions are also listed. Automated QC for the assemblies is under 'year1_freeze_assembly_v2/' since the QC was run on that version of the assemblies.
+
 Raw hifiasm output (including GFAs) are included for the currently assembly release in each sample's working area under `assemblies/hifiasm_v0.14_raw/`.
 
 A complete list of the paths to the assembly fastas in S3/GCP can be found in the `assembly_index/` directory of this repo.
@@ -77,6 +96,7 @@ AnVIL users can access the data stored in GCP through the public [AnVIL_HPRC wor
 
 ### Known Issues
 
+* **outstanding** Screens run on the genbank version of the assemblies did not identify all contaminating contigs. A list of expected contigs is provided in genbank_changes/y1_genbank_remaining_potential_contamination.txt. Note that the assembly for HG02145 (paternal) has a large number of potential EBV contigs which have not been verified.
 * **fixed:** HG002 maternal contig h2tg000045l had a misjoin of chr1 and chr2 along with a large false duplication. Sample was reassembled using a new (v0.14.1) version of hifisasm to fix the misjoin issue. New assemblies released under v2.1.
 * **outstanding:** HG01071 does not produce a MT contig
 * **manually fixed:** HG02080 (maternal) had a misjoin in h2tg000053l
@@ -101,5 +121,9 @@ AnVIL users can access the data stored in GCP through the public [AnVIL_HPRC wor
   * Switched to Hifiasm v0.14
   * Added masking based on minimap2 alignments of SMRTBell adapter dimer
 * Mar 18, 2021: fixed misjoin and false duplications in paternal assemblies for HG01123 & HG01358
-* Apr 06, 2021: fixed misjoin and false duplication in HG002 maternal contig. 
+* Apr 06, 2021: fixed misjoin and false duplication in HG002 maternal contig.
+* Jun 23, 2021: internal release of v2 assemblies (Genbank version)
+  * Genbank identified and dropped around 3k contigs (almost all EBV)
+  * Assemblies were renamed to reflect their accesions in Genbank
+  * Some assemblies were trimmed to remove leading/trailing N's from adapter hard masking
 ```
