@@ -9,7 +9,7 @@
 ### Obtaining assemblies
 
 All assemblies are accessioned at GenBank. They can be downloaded from [public
-HPRC S3 bucket][s3pub] with no egress fee. Individual S3 and GCP URLs to each
+HPRC S3 bucket][s3-pub] with no egress fee. Individual S3 and GCP URLs to each
 assembly can be found in the [index
 file](assembly_index/Year1_assemblies_v2_genbank.index) in this repo.
 
