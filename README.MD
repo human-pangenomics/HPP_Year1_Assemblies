@@ -4,13 +4,47 @@
 
 *This repo describes assemblies produced by the [Human Pangenome Reference Consortium](https://humanpangenome.org/) from year 1 data. Assemblies for 47 samples are available. For information about data reuse and publicating with HPRC data please see the HPRC's [Data Use Protocol](https://humanpangenome.org/data-use-protocol/).*
 
+------------------
+
+### Obtaining assemblies
+
+All assemblies are accessioned at GenBank. They can be downloaded from [public
+HPRC S3 bucket][s3-pub] with no egress fee. Individual S3 and GCP URLs to each
+assembly can be found in the [index
+file](assembly_index/Year1_assemblies_v2_genbank.index) in this repo.
+
+Assemblies are also [available][yr1-agc] as a single 1.5GB file in the
+[AGC][agc] format. Users need to [download AGC][agc-dl] to extract individual
+assemblies. For example:
+
+```sh
+# download all assemblies
+curl -o HPRC-yr1.agc https://zenodo.org/record/5826274/files/HPRC-yr1.agc?download=1
+
+# download precompiled AGC binary for Linux
+curl -L https://github.com/refresh-bio/agc/releases/download/v1.1/agc-1.1_x64-linux.tar.gz|tar -zxvf - agc-1.1_x64-linux/agc
+
+# list all samples
+agc-1.1_x64-linux/agc listset HPRC-yr1.agc
+
+# extract sample NA18906.1
+agc-1.1_x64-linux/agc getset HPRC-yr1.agc NA18906.1 > NA18906.1.fa
+```
+
+[agc]: https://github.com/refresh-bio/agc
+[agc-dl]: https://github.com/refresh-bio/agc/releases
+[yr1-agc]: https://zenodo.org/record/5826274
+[s3-pub]: https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=working/
+
+<!--
 **Note: The assemblies contained in the HPRC [S3](https://s3-us-west-2.amazonaws.com/human-pangenomics/index.html?prefix=working/) and [GCP](https://console.cloud.google.com/storage/browser/fc-4310e737-a388-4a10-8c9e-babe06aaf0cf/working?authuser=0) buckets referred to in this repo have not been fully QC'd, are not published, and many have known issues.**
+-->
 
 ------------------
 
 ### Genbank Version Of Assemblies
 
-Freeze 1 (v2) assemblies were uploaded to Genbank/NCBI and are now available. These assemblies are expected to be the final release of the year 1 assemblies and should be used for all analysis and pangenome work. A list of the current assemblies can be found in the index file `assembly_index/Year1_assemblies_v2_genbank.index`.
+Freeze 1 (v2) assemblies were uploaded to Genbank/NCBI and are now available. These assemblies are expected to be the final release of the year 1 assemblies and should be used for all analysis and pangenome work. A list of the current assemblies and their download links can be found in the index file [assembly_index/Year1_assemblies_v2_genbank.index](assembly_index/Year1_assemblies_v2_genbank.index).
 
 As part of the upload to Genbank, contaminated contigs are identified and dropped. Some contigs which are almost certainly contamination were not identified, however. In addition, leading/trailing hard-masked nucleotides were trimmed from the contigs -- resulting in a co-ordinate change for those contigs. Lastly, contigs were renamed by Genbank with their accession IDs. Files have been provided in the genbank_changes folder to document these changes.
 
