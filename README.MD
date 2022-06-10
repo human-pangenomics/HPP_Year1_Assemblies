@@ -131,6 +131,22 @@ AnVIL users can access the data stored in GCP through the public [AnVIL_HPRC wor
 ### Known Issues
 
 * **outstanding** Screens run on the genbank version of the assemblies did not identify all contaminating contigs. A list of contigs that are likely contamination is provided in `genbank_changes/y1_genbank_remaining_potential_contamination.txt`. Note that the assembly for HG02145 (paternal) has a large number of potential EBV contigs which have not been verified.
+* **outstanding** Three of the assemblies were artifically truncated due to an incomplete download from Genbank. The version of the assemblies on INSDCs is correct, but note that the version on S3/GCP is truncated. See below for details
+  * HG00733
+   * HG00733 Paternal size actual 3,042,264,782
+   * HG00733 Paternal size S3/GCP 3,041,978,016
+   * HG00733 Paternal number contigs actual 695
+   * HG00733 Paternal number contigs S3/GCP 681
+  * HG02630
+   * HG02630 Paternal size actual 3,053,402,297
+   * HG02630 Paternal size S3/GCP 3,053,354,263
+   * HG02630 Paternal number contigs actual 534
+   * HG02630 Paternal number contigs S3/GCP 532
+  * NA21309
+   * NA21309 Maternal size actual 3,036,775,048
+   * NA21309 Maternal size S3/GCP 3,036,587,447
+   * NA21309 Maternal number contigs actual 508
+   * NA21309 Maternal number contigs S3/GCP 501
 * **fixed:** HG002 maternal contig h2tg000045l had a misjoin of chr1 and chr2 along with a large false duplication. Sample was reassembled using a new (v0.14.1) version of hifisasm to fix the misjoin issue. New assemblies released under v2.1.
 * **outstanding:** HG01071 does not produce a MT contig
 * **manually fixed:** HG02080 (maternal) had a misjoin in h2tg000053l
@@ -145,7 +161,7 @@ AnVIL users can access the data stored in GCP through the public [AnVIL_HPRC wor
     * HG01358: For h1tg000058l, keep [0, 95732608), remove [95732608, 150395342), keep [150395342, contig end)
 
 
-### Change Log
+### Assembly Change Log
 
 ```
 * Jan 15, 2021: internal release of v1 assemblies
